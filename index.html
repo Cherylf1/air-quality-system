@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Air quality system</title>
+    <link rel="stylesheet" href="css/index.css" />
+<script src="js/jquery.js"></script>
+<script>
+    // 页面加载时验证登录状态
+    $(document).ready(function() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        // 若未登录，强制跳转回登录页
+        if (!isLoggedIn || isLoggedIn !== 'true') {
+            window.location.href = 'login.html';
+        }
+    });
+</script>
+
+
+  </head>
+  <body>
+    <!-- 头部的盒子 -->
+    <header>
+     
+      <div class="showTime"></div>
+      <button id="logoutBtn" style="position: absolute; left: 20px; top: 20px; padding: 5px 10px; background: #02a6b5; color: white; border: none; border-radius: 3px; cursor: pointer;">
+        Logout
+    </button>
+      <script>
+        var t = null;
+        t = setTimeout(time, 1000); //開始运行
+        function time() {
+          clearTimeout(t); //清除定时器
+          dt = new Date();
+          var y = dt.getFullYear();
+          var mt = dt.getMonth() + 1;
+          var day = dt.getDate();
+          var h = dt.getHours(); //获取时
+          var m = dt.getMinutes(); //获取分
+          var s = dt.getSeconds(); //获取秒
+          document.querySelector(".showTime").innerHTML =
+            "Time：" +
+            y +
+            "/" +
+            mt +
+            "/" +
+            day +
+            "-" +
+            h +
+            ":" +
+            m +
+            ":" +
+            s +
+            "";
+          t = setTimeout(time, 1000); //设定定时器，循环运行
+        }
+         $('#logoutBtn').click(function() {
+        // 清除登录状态
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('username');
+        // 跳转回登录页
+        window.location.href = 'login.html';
+    });
+      </script>
+      &
+    </header>
+
+    <!-- 页面主体部分 -->
+    <section class="mainbox">
+      <div class="column">
+        <div class="panel line">
+          <h2>Wenzhou Weekly AQI trend chart</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel bar">
+          <h2>
+            Bar chart of the top 10 polluted cities across the country 
+          </h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie">
+          <h2>Composition of municipal pollutants占比</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+      <div class="column">
+        <!-- no模块制作 -->
+        <div class="no">
+          <div class="no-hd">
+            <ul>
+              <li>Wenzhou Air Quality Map</li>
+            </ul>
+          </div>
+          <div class="no-bd">
+            
+          </div>
+        </div>
+       <!-- 新增地图容器 -->
+  <div class="map-container">
+    <div id="map" class="map"></div>
+     <div id="pollution-status" class="pollution-info">
+    <p>PM2.5：-- μg/m³</p>
+    <p>PM10：-- μg/m³</p>
+    <p>NO2：-- μg/m³</p>
+    <p>SO2：-- μg/m³</p>
+  </div>
+  </div>
+</div>
+        
+      </div>
+      <div class="column">
+        <div class="panel line2">
+          <h2>Monthly distribution of pollution level days</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel radar">
+          <h2>Radar Comparison of Multiple Indicators for Key Cities</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line3">
+          <h2>The Correlation Trend between AQI and PM2.5</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+    </section>
+    <script src="js/flexible.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/chart.js"></script>
+  </body>
+</html>
